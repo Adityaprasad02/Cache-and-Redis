@@ -1,3 +1,4 @@
 spring:
   application:
     name: redis
+    port: 8080
