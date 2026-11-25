@@ -30,4 +30,10 @@ public class ControlCache {
         return serviceCache.getTeacher(tid) ;
     }
 
+    @GetMapping("/common/{aid}")
+    public String getAllByCache(@PathVariable("aid") int aid ){
+
+        return serviceCache.getAllByCache(aid) ;
+    }
+
 }

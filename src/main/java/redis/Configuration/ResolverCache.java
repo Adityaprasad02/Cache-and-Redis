@@ -53,29 +53,27 @@ public class ResolverCache implements CacheResolver {
         CacheManager selectedCacheManager = null  ;
         Cache cache = null ;
         for (String cacheName : cacheNames) {
-             if(cacheName.equals("users")){
+             if(cacheName.equals("users") || cacheName.equals("products")){
 
                  selectedCacheManager = managerForUser ;
-                 cache = selectedCacheManager.getCache("users") ;
+                 cache = selectedCacheManager.getCache(cacheName) ;
 
-             }else if ( cacheName.equals("teachers")){
+             }else if ( cacheName.equals("teachers") || cacheName.equals("students")){
 
                  selectedCacheManager = managerForTeacher ;
-                 cache = selectedCacheManager.getCache("teachers") ;
+                 cache = selectedCacheManager.getCache(cacheName) ;
 
-             }else if ( cacheName.equals("managerForAdmin")){
+             }else if ( cacheName.equals("admin") || cacheName.equals("employee")){
 
                  selectedCacheManager = managerForAdmin ;
-                 cache = selectedCacheManager.getCache("admin") ;
+                 cache = selectedCacheManager.getCache(cacheName) ;
 
              }
-        }
 
+            assert selectedCacheManager != null;
+            assert cache != null;
 
-        assert selectedCacheManager != null;
-        assert cache != null;
-
-        System.out.println("Cache : " + cache.getName());
+            System.out.println("Cache : " + cache.getName());
 
 
 
@@ -91,6 +89,10 @@ public class ResolverCache implements CacheResolver {
                     break;
                 }
             }
+        }
+
+
+
 
 
 

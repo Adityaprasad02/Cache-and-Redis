@@ -59,4 +59,11 @@ public class ServiceCache {
 
         return "Teachers-" + tid ;
     }
+
+
+    // for dynamically provide cache-Manager on run time
+    @Cacheable( cacheNames = {"admin","products" , "students"} , key = "#aid" , cacheResolver = "dynamicResolverCache")
+    public String getAllByCache( int aid ) {
+        return "ALL-" + aid ;
+     }
 }
