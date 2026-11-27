@@ -41,4 +41,17 @@ public class ControlCache {
         return serviceCache.updateEntity(kid , value ) ;
     }
 
+
+    @GetMapping("/employee/{eid}")
+    public String getEmployee(@PathVariable("eid") int aid ){
+
+        return serviceCache.saveEmployee(aid) ;
+    }
+
+    @DeleteMapping("/delete/{id}")
+    public String delete( @PathVariable("id") int id) {
+       serviceCache.deleteEntity(id);
+       return "deleted" +  id + " successfully " ;
+    }
+
 }

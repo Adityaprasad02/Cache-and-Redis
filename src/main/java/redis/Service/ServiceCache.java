@@ -6,6 +6,7 @@ import org.jspecify.annotations.Nullable;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.cache.Cache;
 import org.springframework.cache.CacheManager;
+import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.cache.interceptor.CacheOperationInvocationContext;
@@ -77,5 +78,30 @@ public class ServiceCache {
     )
     public String updateEntity( int kid , String name ){
            return "user-" + kid + "_" + name ;
+    }
+
+
+
+    @Cacheable(
+            cacheNames = "employee" ,
+            key = "#eid" ,
+            cacheResolver = "dynamicResolverCache"
+    )
+    public String saveEmployee( int eid )  {
+        return "empID: " + eid  ;
+    }
+
+
+    @CacheEvict(
+            cacheNames = "employee" ,
+            allEntries = true , // false by default , so only key = "#id" gets deleted
+            cacheResolver = "dynamicResolverCache" ,
+            beforeInvocation = true //by default its true , delete before method execute then perform other oprns
+    )
+    public void deleteEntity(int id) {
+
+        // interact with repository to delete
+
+        System.out.println("entity-" + id + "deleted successfully");
     }
 }
