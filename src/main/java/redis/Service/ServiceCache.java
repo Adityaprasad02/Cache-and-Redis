@@ -6,6 +6,7 @@ import org.jspecify.annotations.Nullable;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.cache.Cache;
 import org.springframework.cache.CacheManager;
+import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.cache.interceptor.CacheOperationInvocationContext;
 import org.springframework.cache.interceptor.CacheResolver;
@@ -20,7 +21,7 @@ import java.util.Set;
 public class ServiceCache {
     private final CacheManager cacheManager ;
 
-    public ServiceCache(@Qualifier("secondCacheManager") CacheManager cacheManager) {
+    public ServiceCache(@Qualifier("firstCacheManager") CacheManager cacheManager) {
         this.cacheManager = cacheManager;
     }
 
@@ -66,4 +67,15 @@ public class ServiceCache {
     public String getAllByCache( int aid ) {
         return "ALL-" + aid ;
      }
+
+
+     // The Annotation in controller need not to be @PutMapping because both are independent
+    @CachePut(
+            cacheNames = "users" ,
+            key = "#kid" ,
+            cacheResolver = "dynamicResolverCache"
+    )
+    public String updateEntity( int kid , String name ){
+           return "user-" + kid + "_" + name ;
+    }
 }

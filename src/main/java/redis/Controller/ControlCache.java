@@ -36,4 +36,9 @@ public class ControlCache {
         return serviceCache.getAllByCache(aid) ;
     }
 
+    @PutMapping("/update/{kid}")
+    public String update( @PathVariable("kid") int kid , @RequestParam String value ) {
+        return serviceCache.updateEntity(kid , value ) ;
+    }
+
 }

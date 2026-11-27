@@ -48,6 +48,8 @@ public class ResolverCache implements CacheResolver {
     @Override
     public Collection<? extends Cache> resolveCaches(CacheOperationInvocationContext<?> context) {
 
+
+        // this returns the cacheNames in @Cacheable , @CachePut etc
         Set<String> cacheNames = context.getOperation().getCacheNames();
 
         CacheManager selectedCacheManager = null  ;
